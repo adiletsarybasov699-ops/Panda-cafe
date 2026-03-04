@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>PANDA — Манас</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+<!-- =========================
+  HEADER / NAV
+========================= -->
+<header class="header" id="top">
+  <div class="nav-wrap">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="На вверх">
+        <span class="brand-dot"></span>
+        <span class="brand-text">PANDA</span>
+        <span class="brand-sub">Манас</span>
+      </a>
+
+      <!-- Меню в один ряд (на ПК) -->
+      <nav class="nav-links desktop-only">
+        <a href="#pizza">Пицца</a>
+        <a href="#hotrolls">Горячие</a>
+        <a href="#bakedrolls">Запечённые</a>
+        <a href="#coldrolls">Холодные</a>
+        <a href="#sets">Сеты</a>
+        <a href="#wings">Крылышки</a>
+        <a href="#ramen">Рамён</a>
+        <a href="#drinks">Напитки</a>
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <!-- Корзина (оставляем) -->
+      <button class="cart-btn" id="openCart" type="button" aria-label="Открыть корзину">
+        🛒 <span class="desktop-only">Корзина</span>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+
+      <!-- Кнопка меню (мобилка) -->
+      <button class="menu-btn mobile-only" id="menuBtn" type="button" aria-label="Открыть меню">☰</button>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="container mobile-menu mobile-only" id="mobileMenu">
+      <a href="#pizza">Пицца</a>
+      <a href="#hotrolls">Горячие роллы</a>
+      <a href="#bakedrolls">Запечённые роллы</a>
+      <a href="#coldrolls">Холодные роллы</a>
+      <a href="#sets">Сеты</a>
+      <a href="#wings">Крылышки</a>
+      <a href="#ramen">Рамён</a>
+      <a href="#drinks">Напитки</a>
+      <a href="#about">О нас</a>
+      <a href="#contacts">Контакты</a>
+
+      <button class="mini-cart" id="openCartMobile" type="button">
+        🛒 Корзина (<span id="cartCount2">0</span>)
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- =========================
+  HERO
+========================= -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Доставка • город Манас • сом</div>
+      <h1>PANDA — пицца, роллы, рамён</h1>
+      <p>
+        Нажимай “Открыть” — увидишь состав. Нажимай “В корзину” — добавится в заказ.
+        Пицца и крылышки имеют выбор размера.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn" href="#pizza">Смотреть меню</a>
+        <button class="btn ghost" id="openCartHero" type="button">Открыть корзину</button>
+      </div>
+
+      <div class="chips">
+        <a class="chip" href="#pizza">Пицца</a>
+        <a class="chip" href="#hotrolls">Роллы</a>
+        <a class="chip" href="#wings">Крылышки</a>
+        <a class="chip" href="#ramen">Рамён</a>
+        <a class="chip" href="#drinks">Напитки</a>
+      </div>
+    </div>
+
+    <div class="hero-right" id="comboMount"></div>
+  </div>
+</section>
+
+<!-- =========================
+  SECTIONS
+========================= -->
+<section id="pizza" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Пицца</h2>
+      <p>2 размера: маленькая / большая</p>
+    </div>
+    <div class="grid" id="pizzaGrid"></div>
+  </div>
+</section>
+
+<section id="hotrolls" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Горячие роллы</h2>
+      <p>5 позиций</p>
+    </div>
+    <div class="grid" id="hotrollsGrid"></div>
+  </div>
+</section>
+
+<section id="bakedrolls" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Запечённые роллы</h2>
+      <p>8 позиций</p>
+    </div>
+    <div class="grid" id="bakedrollsGrid"></div>
+  </div>
+</section>
+
+<section id="coldrolls" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Холодные роллы</h2>
+      <p>6 позиций</p>
+    </div>
+    <div class="grid" id="coldrollsGrid"></div>
+  </div>
+</section>
+
+<section id="sets" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Сеты</h2>
+      <p>6 наборов</p>
+    </div>
+    <div class="grid" id="setsGrid"></div>
+  </div>
+</section>
+
+<section id="wings" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Крылышки</h2>
+      <p>0.5 кг / 1 кг</p>
+    </div>
+    <div class="grid" id="wingsGrid"></div>
+  </div>
+</section>
+
+<section id="ramen" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Рамён</h2>
+      <p>2 позиции</p>
+    </div>
+    <div class="grid" id="ramenGrid"></div>
+  </div>
+</section>
+
+<section id="drinks" class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>Напитки</h2>
+      <p>Холодные (6) + Чай (5)</p>
+    </div>
+
+    <h3 class="cat-title">Холодные напитки</h3>
+    <div class="grid" id="coldDrinksGrid"></div>
+
+    <h3 class="cat-title">Чай</h3>
+    <div class="grid" id="teaGrid"></div>
+  </div>
+</section>
+
+<section id="about" class="section alt">
+  <div class="container">
+    <h2>О нас</h2>
+    <p class="about-text">
+      Кафе <strong>PANDA</strong> находится в городе <strong>Манас</strong>, <strong>Ноокенский район</strong>.
+      Мы готовим пиццу, роллы и другие блюда — вкусно и с заботой. 🐼
+    </p>
+  </div>
+</section>
+
+<footer id="contacts" class="footer">
+  <div class="container footer-inner">
+    <div class="contacts">
+      <div class="foot-title">Контакты</div>
+
+      <div class="contact-item">📍 Адрес: <strong>г. Манас, Ноокенский район</strong></div>
+      <div class="contact-item">📞 Тел: <strong>0550 454 845</strong></div>
+      <div class="contact-item">💬 WhatsApp: <strong>0550 454 845</strong></div>
+      <div class="contact-item">🕒 Время: Пн–Вс 10:00–22:00</div>
+
+      <div class="contact-item">
+        📷 Instagram:
+        <a class="insta" href="https://www.instagram.com/panda_manas/" target="_blank" rel="noopener">
+          @panda_manas
+        </a>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          title="Карта"
+          src="https://www.google.com/maps?q=%D0%9C%D0%B0%D0%BD%D0%B0%D1%81%2C%20%D0%9D%D0%BE%D0%BE%D0%BA%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%80%D0%B0%D0%B9%D0%BE%D0%BD&z=16&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="foot-text">© 2026 • PANDA</div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================
+  MODAL (одна на все товары)
+========================= -->
+<div class="modal" id="modal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <h3 id="modalTitle">Товар</h3>
+    <img class="modal-img" id="modalImg" src="" alt="" />
+    <p id="modalDesc"></p>
+
+    <div class="modal-row" id="modalSizes"></div>
+
+    <div class="modal-actions">
+      <button class="btn" id="modalAdd" type="button">В корзину</button>
+      <button class="btn ghost" id="modalClose" type="button">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+  CART (внутри сайта)
+========================= -->
+<aside class="cart" id="cart">
+  <div class="cart-head">
+    <h3>Корзина</h3>
+    <button class="icon-btn" id="closeCart" type="button" aria-label="Закрыть корзину">✕</button>
+  </div>
+
+  <div class="cart-body" id="cartItems"></div>
+
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>Итого:</span>
+      <strong id="cartTotal">0 сом</strong>
+    </div>
+
+    <button class="cart-order" id="cartOrder" type="button">Оформить заказ (WhatsApp)</button>
+    <button class="cart-clear" id="cartClear" type="button">Очистить</button>
+  </div>
+</aside>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- =========================
+  JS
+========================= -->
+<script>
+/* =========================
+   1) ДАННЫЕ (все карточки)
+========================= */
+const DATA = {
+  combo: {
+    id: "combo-week",
+    name: "Комбо недели",
+    img: "https://avatars.mds.yandex.net/get-sprav-products/1644120/2a000001980e92db6637e98618e25e57f1d0/M_height",
+    desc: "Пицца + фри + соус (выгодно!)",
+    price: 499
+  },
+
+  pizza: [
+    { id:"pz1", name:"Пепперони", img:"https://instafood.com.ua/images/images/pitsa-pepperoni.jpg", desc:"Острая колбаса, сыр, томатный соус.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz2", name:"Сырная", img:"https://cdn.vkuso.ru/uploads/picca-s-syrom-po-domashnemu.jpg", desc:"Нежная пицца с сырным миксом.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz3", name:"Маргарита", img:"https://static.1000.menu/img/content-v2/ef/27/10853/picca-margarita-v-domashnix-usloviyax_1769509858_1_bsgg32n_max.jpg", desc:"Томаты, сыр, базилик.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz4", name:"BBQ", img:"https://cdn.monopizza.com.ua/mp-ua/products/0002-pica-bbq.jpg?&w=600&h=330&format=webp&mode=fit&q=10", desc:"Курица, соус BBQ, сыр.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz5", name:"4 сыра", img:"https://the-challenger.ru/wp-content/uploads/2017/07/shutterstock_309974039-800x579.jpg", desc:"Сырный микс и сливочный вкус.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz6", name:"Грибная", img:"https://img.iamcook.ru/old/upl/recipes/cat/u-15f93cf9a105e0d1cce5026ac96937fb.jpg", desc:"Грибы, сыр, соус.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz7", name:"Куриная", img:"https://nasha.severnaya.ru/upload/iblock/020/rawvp7smh2jjavm7a9lsd603g0nx6xab.jpg", desc:"Курица, овощи, сыр.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz8", name:"Мясная", img:"https://www.cafedolcevita.ru/wp-content/uploads/2022/01/IMG_4866-scaled.jpg", desc:"Мясной микс и сыр.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz9", name:"Ветчина-Сыр", img:"https://img.iamcook.ru/2018/upl/recipes/zen/u-fdc5e4a28dc98e16d83ca37db19a37a2.jpg", desc:"Ветчина, сыр, соус.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz10", name:"Острая", img:"https://megachilipizza.ru/?wordpress_ch_gi=wp-content%2Fuploads%2F2025%2F03%2Fclose-up-shot-delicious-pizza-wooden-cutting-board-red-peppers-isolated-dark-surface-with-free-space-1024x683.jpg&n=bjKMZupDrQ4zERUefiGLw", desc:"Острая колбаса и перчик.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+    { id:"pz11", name:"Домашняя", img:"https://www.djurenko.com/wp-content/uploads/2011/06/domashnyaya-pitstsa_11.jpg", desc:"Курица, овощи, сыр.", sizes:[{label:"Маленькая", price:480},{label:"Большая", price:680}] },
+  ],
+
+  hotrolls: [
+    { id:"hr1", name:"Горячий Чикен", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt8k0EfVamEIhynS-2g2Zkr_xsdrdvXvukHg&s", desc:"Горячий ролл с курицей. Сверху хрустящий.", price:320 },
+    { id:"hr2", name:"Горячий Сырный", img:"https://roll-club.dp.ua/wp-content/uploads/2024/02/80.jpg", desc:"Тёплый ролл с сыром. Мягкий и вкусный.", price:320 },
+    { id:"hr3", name:"Горячий Острый", img:"https://lh6.googleusercontent.com/proxy/DYgiOuH6o2JOw8ou-AleH1om69xPAeukROL_ox7qzjQowP7NQaEQBfWjNS_jaLWVi1BfNs8Xx8n1oTnZDnasIXHJlyMnXMOHGpUetrFd4zGCqKS3jtj8znNCUHjNNJ4", desc:"Горячий ролл с острым вкусом. Не сильно, нормально.", price:330 },
+    { id:"hr4", name:"Горячий Краб", img:"https://unopizzagrill.com.ua/image/cache/catalog/menu/sushi/img_3359-1920x1281.webp", desc:"Тёплый ролл с крабом и соусом.", price:330 },
+    { id:"hr5", name:"Горячий Лосось", img:"https://image.vsem-edu-oblako.ru/upload/store/merchant4337/7c27109e436e94f029e9d39bcf305906.jpeg?w=900&h=675", desc:"Горячий ролл с лососем. Очень нежный.", price:350 },
+  ],
+
+  bakedrolls: [
+    { id:"br1", name:"Запечённый Чикен", img:"https://sushitime.club/image/sushitime/cache/catalog/bluda/grile-rolls/zapecheniy%20chiken%20roll-1000x700.png?v=1744624063", desc:"Запечённый ролл с курицей. Сверху сыр.", price:360 },
+    { id:"br2", name:"Запечённый Сырный", img:"https://higasi.ru/image/cache/catalog/zapechenyjvinograd-syrsplesenju-840x562.jpg", desc:"Ролл с сыром. Очень сытный.", price:360 },
+    { id:"br3", name:"Запечённый Краб", img:"https://sushione.ru/assets/images/products/177/zapech-roll-ostr-zapech-krab.jpg", desc:"Запечённый ролл с крабом и соусом.", price:370 },
+    { id:"br4", name:"Запечённый Острый", img:"https://sushione.ru/assets/images/products/177/zapech-roll-ostr-zapech-krab.jpg", desc:"Запечённый ролл. Немного острый.", price:370 },
+    { id:"br5", name:"Запечённый Лосось", img:"https://pp.userapi.com/c848628/v848628830/d1fe0/sD89gdPLH80.jpg", desc:"Лосось и сыр. Запечённый вкус.", price:390 },
+    { id:"br6", name:"Запечённый Микс", img:"https://cdn-kz3.foodpicasso.com/assets/2024/02/27/f8409bf3c210aa7ff8be91b0ba3fb752---jpg_1000x_103c0_convert.jpg", desc:"Тут разные начинки вместе.", price:380 },
+    { id:"br7", name:"Запечённый Грибной", img:"https://cdn.foodpicasso.com/assets/2023/05/25/2095e72e170f7bfb3fc1bffc9297e965---jpg_1000x_103c0_convert.jpg", desc:"Ролл с грибами. Вкус мягкий.", price:370 },
+    { id:"br8", name:"Запечённый Тунец", img:"https://cdn.sushi-master.ua/SKU/SUSHI-MASTER/%D0%97%D0%B0%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%80%D0%BE%D0%BB%D0%BB%D1%8B/B3173681-2F9C-11ED-8371-B11A020B59BC-1969%D1%851100_0042_%D0%97%D0%B0%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D1%81-%D1%82%D1%83%D0%BD%D1%86%D0%BE%D0%BC-(%D0%BE%D1%81%D1%82%D1%80%D1%8B%D0%B9).png?&w=600&h=330&format=webp&mode=fit&q=10", desc:"Запечённый ролл с тунцом.", price:390 },
+  ],
+
+  coldrolls: [
+    { id:"cr1", name:"Филадельфия", img:"https://swlife.ru/image/cache/catalog/recipe/c7/b2/c7b2bb283346ef24401014e3e2e13c3d-0x0.webp", desc:"Классика. Лосось и сливочный сыр.", price:320 },
+    { id:"cr2", name:"Калифорния", img:"https://img.delo-vcusa.ru/2019/09/rolly-s-gorbushej-i-svezhim-ogurcom.jpg", desc:"Краб и огурец. Лёгкий вкус.", price:300 },
+    { id:"cr3", name:"Огурец-Сыр", img:"https://static.tildacdn.com/tild3061-3936-4737-b539-353861633233/6.jpg", desc:"Простой ролл. Огурец и сыр.", price:260 },
+    { id:"cr4", name:"Краб Классик", img:"https://sushiwok.ru/img/2f1369e824977daa6a164a095201aa60", desc:"Ролл с крабом и соусом.", price:280 },
+    { id:"cr5", name:"Лосось Лайт", img:"https://pravilniesushi.ru/wp-content/uploads/2016/12/IMG_1702_rolly_04_web.jpg", desc:"Лосось и огурец. Лёгкий ролл.", price:310 },
+    { id:"cr6", name:"Чикен Лайт", img:"https://shuba.life/static/content/thumbs/1824x912/9/bc/xl3guc---c2x1x50px50p-up--7039742a50124646b54fe1a20f4b7bc9.jpg", desc:"Курица и соус. Просто и вкусно.", price:290 },
+  ],
+
+  sets: [
+    { id:"s1", name:"Сет Мини", img:"https://sushi-max.ru/thumb/2/-n17H-Tq_plTPvdnHOQfJw/600r600/d/1000213235.jpg", desc:"Небольшой сет. Хватает на 1–2 человека.", price:1200 },
+    { id:"s2", name:"Сет Семейный", img:"https://sushi-time.kg/wp-content/uploads/2022/01/IMG_5069-min.jpg", desc:"Набор для семьи или компании.", price:1600 },
+    { id:"s3", name:"Сет Острый", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJAIQubv7UyPjSwSpmJF59OqagEQ5XoiNZ7Q&s", desc:"Сет для тех, кто любит острое.", price:1500 },
+    { id:"s4", name:"Сет Микс", img:"https://ucrabs.by/image/cache/catalog/products/salmon-box-600x600.jpg", desc:"Тут есть горячие и холодные роллы.", price:1700 },
+    { id:"s5", name:"Сет Премиум", img:"https://rollfusion.pl/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fsushi-images%2Fimages%2Fproducts%2F72.jpg&w=3840&q=75", desc:"Сет подороже. Больше лосося.", price:1900 },
+    { id:"s6", name:"Сет Большой", img:"https://ajia.by/image/cache/catalog/img_7970-2360x2333.png", desc:"Большой набор для большой компании.", price:2200 },
+  ],
+
+  wings: [
+    { id:"w1", name:"Крылышки BBQ", img:"https://www.chefmarket.ru/blog/wp-content/uploads/2021/02/baked-chicken-wings-1-2000x1200.jpg", desc:"Сочные в соусе BBQ.", sizes:[{label:"0.5 кг", price:390},{label:"1 кг", price:690}] },
+    { id:"w2", name:"Крылышки Острые", img:"https://i.pinimg.com/736x/8b/7e/90/8b7e9059de0e82ffcf49718fc5fee59d.jpg", desc:"Пикантные и хрустящие.", sizes:[{label:"0.5 кг", price:390},{label:"1 кг", price:690}] },
+  ],
+
+  ramen: [
+    { id:"rm1", name:"Рамён Классический", img:"https://wok2go.com.ua/wp-content/uploads/2025/07/sup-ramen-s-moreproductami-recept.jpg", desc:"Тёплый суп с лапшой и бульоном. Простой и вкусный.", price:299 },
+    { id:"rm2", name:"Рамён Острый", img:"https://dovolnayaruba.ru/wp-content/uploads/2021/12/IMG_4364-scaled.jpg", desc:"Горячий суп с лапшой и острым соусом. Для тех, кто любит поострее.", price:319 },
+  ],
+
+  coldDrinks: [
+    { id:"d1", name:"Кола", img:"https://s0.rbk.ru/v6_top_pics/media/img/4/64/347073273915644.jpeg", desc:"Холодная газировка. Хорошо освежает.", price:99 },
+    { id:"d2", name:"Фанта", img:"https://i.pinimg.com/736x/24/d7/bf/24d7bf3e522caa625e2f9faf3ad20a37.jpg", desc:"Газировка со вкусом апельсина.", price:99 },
+    { id:"d3", name:"Спрайт", img:"https://muizre.ru/_ld/25/42180270.jpg", desc:"Газированный напиток со вкусом лайма.", price:99 },
+    { id:"d4", name:"Айран", img:"https://img.championat.com/WipZHR4vd9lazmd4Fz1rgwRqNoWvWfkvn_Y3Wam-wjE/p(q:0)/i/s/z/17628821021634477863.jpg", desc:"Холодный напиток. Освежает и полезный.", price:79 },
+    { id:"d5", name:"Сок", img:"https://img.freepik.com/free-photo/immunity-boosting-food-healthy-lifestyle-with-citrus_23-2149211498.jpg?semt=ais_hybrid&w=740&q=80", desc:"Фруктовый сок. Разные вкусы.", price:89 },
+    { id:"d6", name:"Вода", img:"https://s0.rbk.ru/v6_top_pics/media/img/4/89/756188213182894.jpg", desc:"Чистая вода 0.5 литра.", price:49 },
+  ],
+
+  tea: [
+    { id:"t1", name:"Чай чёрный", img:"https://coffeeynya.ua/image/catalog/blogs/%D0%BA%D0%B0%D0%BA-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B7%D0%B0%D0%B2%D0%B0%D1%80%D0%B8%D0%B2%D0%B0%D1%82%D1%8C-%D1%87%D0%B5%D1%80%D0%BD%D1%8B%D0%B9-%D1%87%D0%B0%D0%B9-1024x685.jpg", desc:"Обычный классический чай.", price:49 },
+    { id:"t2", name:"Чай зелёный", img:"https://static.nv.ua/shared/system/MediaPhoto/images/000/025/469/original/15115aeea4e7f96eb67bb86d5887fc2a.png?q=85&stamp=20191030131248&f=webp", desc:"Лёгкий и полезный чай.", price:49 },
+    { id:"t3", name:"Чай с лимоном", img:"https://avatars.mds.yandex.net/get-vertis-journal/4080458/a7514b44-b93a-4433-92e8-4047ef8615dd.jpeg/1600x1600", desc:"Чай с кусочком лимона. Ароматный.", price:59 },
+    { id:"t4", name:"Чай имбирный", img:"https://images.prom.ua/2118357192_w600_h600_imbirnyj-chaj-vzbodrit.jpg", desc:"Тёплый чай с имбирём. Согревает.", price:69 },
+    { id:"t5", name:"Чай мятный", img:"https://masterpiecer-images.s3.yandex.net/588b9a39920d11ee9e3192669a1675b3:upscaled", desc:"Чай с мятой. Освежает.", price:69 },
+  ],
+};
+
+/* =========================
+   2) ХЕЛПЕРЫ
+========================= */
+const qs = (s, p=document) => p.querySelector(s);
+function formatSom(n){ return `${n} сом`; }
+
+/* =========================
+   3) РЕНДЕР КАРТОЧЕК
+========================= */
+function renderCard(item, {category, mountId}) {
+  const mount = qs(`#${mountId}`);
+  if(!mount) return;
+
+  const hasSizes = Array.isArray(item.sizes) && item.sizes.length;
+
+  const priceLabel = hasSizes
+    ? `${item.sizes[0].price} / ${item.sizes[item.sizes.length-1].price} сом`
+    : `${item.price} сом`;
+
+  const sizeSelect = hasSizes ? `
+    <select class="size" data-id="${item.id}" data-cat="${category}">
+      ${item.sizes.map((s, idx)=> `<option value="${idx}">${s.label} — ${s.price} сом</option>`).join("")}
+    </select>
+  ` : "";
+
+  const html = `
+    <article class="card" data-id="${item.id}" data-cat="${category}">
+      <div class="card-img img-wrap">
+        <img src="${item.img}" alt="${item.name}">
+      </div>
+      <div class="card-body">
+        <h3>${item.name}</h3>
+        <p>${item.desc}</p>
+
+        <div class="card-row">
+          <span class="price">${priceLabel}</span>
+          <button class="add ghost" type="button" data-open="${item.id}" data-cat="${category}">
+            Открыть
+          </button>
+        </div>
+
+        ${sizeSelect}
+
+        <button class="add full" type="button" data-add="${item.id}" data-cat="${category}">
+          В корзину
+        </button>
+      </div>
+    </article>
+  `;
+  mount.insertAdjacentHTML("beforeend", html);
+}
+
+function renderAll() {
+  // Комбо в hero
+  const comboMount = qs("#comboMount");
+  const c = DATA.combo;
+  comboMount.innerHTML = `
+    <article class="card combo">
+      <div class="card-img img-wrap">
+        <img src="${c.img}" alt="${c.name}">
+      </div>
+      <div class="card-body">
+        <h3>${c.name}</h3>
+        <p>${c.desc}</p>
+        <div class="card-row">
+          <span class="price">${formatSom(c.price)}</span>
+          <button class="add" type="button" data-add="${c.id}" data-cat="combo">В корзину</button>
+        </div>
+      </div>
+    </article>
+  `;
+
+  DATA.pizza.forEach(x => renderCard(x, {category:"pizza", mountId:"pizzaGrid"}));
+  DATA.hotrolls.forEach(x => renderCard(x, {category:"hotrolls", mountId:"hotrollsGrid"}));
+  DATA.bakedrolls.forEach(x => renderCard(x, {category:"bakedrolls", mountId:"bakedrollsGrid"}));
+  DATA.coldrolls.forEach(x => renderCard(x, {category:"coldrolls", mountId:"coldrollsGrid"}));
+  DATA.sets.forEach(x => renderCard(x, {category:"sets", mountId:"setsGrid"}));
+  DATA.wings.forEach(x => renderCard(x, {category:"wings", mountId:"wingsGrid"}));
+  DATA.ramen.forEach(x => renderCard(x, {category:"ramen", mountId:"ramenGrid"}));
+  DATA.coldDrinks.forEach(x => renderCard(x, {category:"coldDrinks", mountId:"coldDrinksGrid"}));
+  DATA.tea.forEach(x => renderCard(x, {category:"tea", mountId:"teaGrid"}));
+}
+
+/* =========================
+   4) ПОИСК ТОВАРА
+========================= */
+function findItem(cat, id) {
+  if (cat === "combo") return DATA.combo.id === id ? DATA.combo : null;
+  const map = {
+    pizza: DATA.pizza,
+    hotrolls: DATA.hotrolls,
+    bakedrolls: DATA.bakedrolls,
+    coldrolls: DATA.coldrolls,
+    sets: DATA.sets,
+    wings: DATA.wings,
+    ramen: DATA.ramen,
+    coldDrinks: DATA.coldDrinks,
+    tea: DATA.tea,
+  };
+  const arr = map[cat] || [];
+  return arr.find(x => x.id === id) || null;
+}
+
+/* =========================
+   5) КОРЗИНА (LocalStorage)
+========================= */
+const LS_KEY = "panda_cart_v1";
+let cart = [];
+
+function loadCart(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    cart = raw ? JSON.parse(raw) : [];
+  }catch(e){
+    cart = [];
+  }
+}
+function saveCart(){
+  localStorage.setItem(LS_KEY, JSON.stringify(cart));
+}
+
+function cartCount(){
+  return cart.reduce((s,i)=> s + i.qty, 0);
+}
+function cartTotal(){
+  return cart.reduce((s,i)=> s + i.qty * i.price, 0);
+}
+
+function makeCartKey(itemId, sizeLabel){
+  return `${itemId}__${sizeLabel || "ONE"}`;
+}
+
+function addToCart({cat, id, sizeIndex=null}) {
+  const item = findItem(cat, id);
+  if (!item) return;
+
+  let price = item.price;
+  let sizeLabel = "";
+
+  // если есть sizes — берём выбранный размер
+  if (Array.isArray(item.sizes) && item.sizes.length) {
+    const idx = (typeof sizeIndex === "number" && !Number.isNaN(sizeIndex)) ? sizeIndex : 0;
+    price = item.sizes[idx].price;
+    sizeLabel = item.sizes[idx].label;
+  }
+
+  const key = makeCartKey(id, sizeLabel);
+  const exist = cart.find(x => x.key === key);
+
+  if (exist) {
+    exist.qty += 1;
+  } else {
+    cart.push({
+      key,
+      id,
+      cat,
+      name: item.name,
+      sizeLabel: sizeLabel,
+      price: price,
+      qty: 1,
+    });
+  }
+
+  saveCart();
+  renderCartBox();
+  updateBadges();
+}
+
+function incItem(key){
+  const it = cart.find(x=>x.key===key);
+  if(!it) return;
+  it.qty++;
+  saveCart(); renderCartBox(); updateBadges();
+}
+function decItem(key){
+  const it = cart.find(x=>x.key===key);
+  if(!it) return;
+  it.qty--;
+  if(it.qty<=0) cart = cart.filter(x=>x.key!==key);
+  saveCart(); renderCartBox(); updateBadges();
+}
+function removeItem(key){
+  cart = cart.filter(x=>x.key!==key);
+  saveCart(); renderCartBox(); updateBadges();
+}
+function clearCart(){
+  cart = [];
+  saveCart(); renderCartBox(); updateBadges();
+}
+
+function updateBadges(){
+  const n = cartCount();
+  qs("#cartCount").textContent = n;
+  qs("#cartCount2").textContent = n;
+  qs("#cartTotal").textContent = formatSom(cartTotal());
+}
+
+function renderCartBox(){
+  const box = qs("#cartItems");
+  box.innerHTML = "";
+
+  if(cart.length === 0){
+    box.innerHTML = `<div class="cart-empty">Корзина пустая 😅</div>`;
+    qs("#cartTotal").textContent = formatSom(0);
+    return;
+  }
+
+  cart.forEach(it=>{
+    const title = it.sizeLabel ? `${it.name} — ${it.sizeLabel}` : it.name;
+    const sum = it.qty * it.price;
+
+    box.insertAdjacentHTML("beforeend", `
+      <div class="cart-item">
+        <div class="cart-item-main">
+          <div class="cart-item-title">${title}</div>
+          <div class="cart-item-sub">${it.qty} × ${it.price} = <strong>${sum} сом</strong></div>
+        </div>
+
+        <div class="cart-item-actions">
+          <button class="qty" type="button" data-dec="${it.key}">−</button>
+          <span class="qty-num">${it.qty}</span>
+          <button class="qty" type="button" data-inc="${it.key}">+</button>
+          <button class="trash" type="button" data-del="${it.key}">✕</button>
+        </div>
+      </div>
+    `);
+  });
+
+  qs("#cartTotal").textContent = formatSom(cartTotal());
+}
+
+/* =========================
+   6) МОДАЛКА
+========================= */
+let modalState = {cat:null, id:null, sizeIndex:0};
+
+function openModal(cat, id){
+  const item = findItem(cat, id);
+  if(!item) return;
+
+  qs("#modalTitle").textContent = item.name;
+  qs("#modalImg").src = item.img;
+  qs("#modalImg").alt = item.name;
+  qs("#modalDesc").textContent = item.desc;
+
+  const sizesWrap = qs("#modalSizes");
+  sizesWrap.innerHTML = "";
+  modalState = {cat, id, sizeIndex:0};
+
+  // кнопки размеров в модалке
+  if(Array.isArray(item.sizes) && item.sizes.length){
+    sizesWrap.innerHTML = `
+      <div class="sizes">
+        ${item.sizes.map((s, idx)=>`
+          <button type="button" class="size-btn ${idx===0?"active":""}" data-size="${idx}">
+            ${s.label} • ${s.price} сом
+          </button>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  qs("#modal").classList.add("show");
+}
+
+function closeModal(){
+  qs("#modal").classList.remove("show");
+}
+
+/* =========================
+   7) WhatsApp заказ
+========================= */
+const WHATSAPP_PHONE = "996550454845"; // 0550 454 845
+
+function buildOrderText(){
+  if(cart.length === 0) return "Здравствуйте! Хочу сделать заказ, но корзина пустая.";
+
+  const lines = [];
+  lines.push("Здравствуйте! Хочу сделать заказ из PANDA 🐼");
+  lines.push("");
+
+  cart.forEach((it, i)=>{
+    const title = it.sizeLabel ? `${it.name} — ${it.sizeLabel}` : it.name;
+    const sum = it.qty * it.price;
+    lines.push(`${i+1}) ${title} — ${it.qty} шт × ${it.price} = ${sum} сом`);
+  });
+
+  lines.push("");
+  lines.push(`Итого: ${cartTotal()} сом`);
+  lines.push("");
+  lines.push("Имя: ______");
+  lines.push("Адрес: ______");
+  lines.push("Комментарий: ______");
+
+  return lines.join("\n");
+}
+
+function sendToWhatsApp(){
+  const text = buildOrderText();
+  const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
+}
+
+/* =========================
+   8) Открыть/закрыть корзину
+========================= */
+function openCart(){
+  qs("#cart").classList.add("show");
+  qs("#cartOverlay").classList.add("show");
+}
+function closeCart(){
+  qs("#cart").classList.remove("show");
+  qs("#cartOverlay").classList.remove("show");
+}
+
+/* =========================
+   9) Мобильное меню
+========================= */
+const menuBtn = qs("#menuBtn");
+const mobileMenu = qs("#mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("show");
+});
+mobileMenu.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") {
+    mobileMenu.classList.remove("show");
+  }
+});
+
+/* =========================
+   10) События кликов
+========================= */
+document.addEventListener("click", (e)=>{
+  const t = e.target;
+
+  // Открыть модалку
+  if(t.matches("[data-open]")){
+    const id = t.getAttribute("data-open");
+    const cat = t.getAttribute("data-cat");
+    openModal(cat, id);
+  }
+
+  // В корзину из карточки
+  if(t.matches("[data-add]")){
+    const id = t.getAttribute("data-add");
+    const cat = t.getAttribute("data-cat");
+
+    // если есть select размеров — берём его
+    const card = t.closest(".card");
+    const sel = card ? card.querySelector(".size") : null;
+    const sizeIndex = sel ? Number(sel.value) : null;
+
+    addToCart({cat, id, sizeIndex});
+    openCart();
+  }
+
+  // Размер в модалке
+  if(t.matches("[data-size]")){
+    const idx = Number(t.getAttribute("data-size"));
+    modalState.sizeIndex = idx;
+
+    const btns = qs("#modalSizes").querySelectorAll(".size-btn");
+    btns.forEach(b=>b.classList.remove("active"));
+    t.classList.add("active");
+  }
+
+  // +/- в корзине
+  if(t.matches("[data-inc]")) incItem(t.getAttribute("data-inc"));
+  if(t.matches("[data-dec]")) decItem(t.getAttribute("data-dec"));
+  if(t.matches("[data-del]")) removeItem(t.getAttribute("data-del"));
+});
+
+// Модалка: фон/закрыть
+qs("#modalBg").addEventListener("click", closeModal);
+qs("#modalClose").addEventListener("click", closeModal);
+
+// Модалка: добавить в корзину
+qs("#modalAdd").addEventListener("click", ()=>{
+  addToCart({cat: modalState.cat, id: modalState.id, sizeIndex: modalState.sizeIndex});
+  closeModal();
+  openCart();
+});
+
+// Кнопки корзины
+qs("#openCart").addEventListener("click", openCart);
+qs("#openCartMobile").addEventListener("click", openCart);
+qs("#openCartHero").addEventListener("click", openCart);
+qs("#closeCart").addEventListener("click", closeCart);
+qs("#cartOverlay").addEventListener("click", closeCart);
+
+qs("#cartClear").addEventListener("click", clearCart);
+qs("#cartOrder").addEventListener("click", sendToWhatsApp);
+
+// ESC закрывает модалку/корзину
+document.addEventListener("keydown",(e)=>{
+  if(e.key === "Escape"){
+    closeModal();
+    closeCart();
+    mobileMenu.classList.remove("show");
+  }
+});
+
+/* =========================
+   11) Старт
+========================= */
+renderAll();
+loadCart();
+renderCartBox();
+updateBadges();
+</script>
+
+</body>
+</html>
