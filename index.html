@@ -34,7 +34,7 @@
         <a href="#contacts">Контакты</a>
       </nav>
 
-      <!-- Корзина (оставляем) -->
+      <!-- Корзина -->
       <button class="cart-btn" id="openCart" type="button" aria-label="Открыть корзину">
         🛒 <span class="desktop-only">Корзина</span>
         <span class="cart-badge" id="cartCount">0</span>
@@ -63,6 +63,9 @@
     </div>
   </div>
 </header>
+
+<!-- ✅ overlay для закрытия мобильного меню кликом вне -->
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <!-- =========================
   HERO
@@ -224,7 +227,7 @@
 </footer>
 
 <!-- =========================
-  MODAL (одна на все товары)
+  MODAL
 ========================= -->
 <div class="modal" id="modal">
   <div class="modal-bg" id="modalBg"></div>
@@ -243,7 +246,7 @@
 </div>
 
 <!-- =========================
-  CART (внутри сайта)
+  CART
 ========================= -->
 <aside class="cart" id="cart">
   <div class="cart-head">
@@ -271,7 +274,7 @@
 ========================= -->
 <script>
 /* =========================
-   1) ДАННЫЕ (все карточки)
+   1) ДАННЫЕ
 ========================= */
 const DATA = {
   combo: {
@@ -414,7 +417,6 @@ function renderCard(item, {category, mountId}) {
 }
 
 function renderAll() {
-  // Комбо в hero
   const comboMount = qs("#comboMount");
   const c = DATA.combo;
   comboMount.innerHTML = `
@@ -482,12 +484,8 @@ function saveCart(){
   localStorage.setItem(LS_KEY, JSON.stringify(cart));
 }
 
-function cartCount(){
-  return cart.reduce((s,i)=> s + i.qty, 0);
-}
-function cartTotal(){
-  return cart.reduce((s,i)=> s + i.qty * i.price, 0);
-}
+function cartCount(){ return cart.reduce((s,i)=> s + i.qty, 0); }
+function cartTotal(){ return cart.reduce((s,i)=> s + i.qty * i.price, 0); }
 
 function makeCartKey(itemId, sizeLabel){
   return `${itemId}__${sizeLabel || "ONE"}`;
@@ -500,7 +498,6 @@ function addToCart({cat, id, sizeIndex=null}) {
   let price = item.price;
   let sizeLabel = "";
 
-  // если есть sizes — берём выбранный размер
   if (Array.isArray(item.sizes) && item.sizes.length) {
     const idx = (typeof sizeIndex === "number" && !Number.isNaN(sizeIndex)) ? sizeIndex : 0;
     price = item.sizes[idx].price;
@@ -510,19 +507,8 @@ function addToCart({cat, id, sizeIndex=null}) {
   const key = makeCartKey(id, sizeLabel);
   const exist = cart.find(x => x.key === key);
 
-  if (exist) {
-    exist.qty += 1;
-  } else {
-    cart.push({
-      key,
-      id,
-      cat,
-      name: item.name,
-      sizeLabel: sizeLabel,
-      price: price,
-      qty: 1,
-    });
-  }
+  if (exist) exist.qty += 1;
+  else cart.push({ key, id, cat, name: item.name, sizeLabel, price, qty: 1 });
 
   saveCart();
   renderCartBox();
@@ -610,7 +596,6 @@ function openModal(cat, id){
   sizesWrap.innerHTML = "";
   modalState = {cat, id, sizeIndex:0};
 
-  // кнопки размеров в модалке
   if(Array.isArray(item.sizes) && item.sizes.length){
     sizesWrap.innerHTML = `
       <div class="sizes">
@@ -625,22 +610,18 @@ function openModal(cat, id){
 
   qs("#modal").classList.add("show");
 }
-
-function closeModal(){
-  qs("#modal").classList.remove("show");
-}
+function closeModal(){ qs("#modal").classList.remove("show"); }
 
 /* =========================
    7) WhatsApp заказ
 ========================= */
-const WHATSAPP_PHONE = "996550454845"; // 0550 454 845
+const WHATSAPP_PHONE = "996550454845";
 
 function buildOrderText(){
   if(cart.length === 0) return "Здравствуйте! Хочу сделать заказ, но корзина пустая.";
 
   const lines = [];
-  lines.push("Здравствуйте! Хочу сделать заказ из PANDA 🐼");
-  lines.push("");
+  lines.push("Здравствуйте! Хочу сделать заказ из PANDA 🐼", "");
 
   cart.forEach((it, i)=>{
     const title = it.sizeLabel ? `${it.name} — ${it.sizeLabel}` : it.name;
@@ -648,13 +629,7 @@ function buildOrderText(){
     lines.push(`${i+1}) ${title} — ${it.qty} шт × ${it.price} = ${sum} сом`);
   });
 
-  lines.push("");
-  lines.push(`Итого: ${cartTotal()} сом`);
-  lines.push("");
-  lines.push("Имя: ______");
-  lines.push("Адрес: ______");
-  lines.push("Комментарий: ______");
-
+  lines.push("", `Итого: ${cartTotal()} сом`, "", "Имя: ______", "Адрес: ______", "Комментарий: ______");
   return lines.join("\n");
 }
 
@@ -677,19 +652,37 @@ function closeCart(){
 }
 
 /* =========================
-   9) Мобильное меню
+   9) Мобильное меню (анимация + закрытие вне меню)
 ========================= */
 const menuBtn = qs("#menuBtn");
 const mobileMenu = qs("#mobileMenu");
+const menuOverlay = qs("#menuOverlay");
 
-menuBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("show");
+function openMobileMenu(){
+  mobileMenu.classList.add("show");
+  menuOverlay.classList.add("show");
+}
+function closeMobileMenu(){
+  mobileMenu.classList.remove("show");
+  menuOverlay.classList.remove("show");
+}
+function toggleMobileMenu(){
+  if(mobileMenu.classList.contains("show")) closeMobileMenu();
+  else openMobileMenu();
+}
+
+menuBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMobileMenu();
 });
+
+// Закрытие при клике по ссылке
 mobileMenu.addEventListener("click", (e) => {
-  if (e.target.tagName === "A") {
-    mobileMenu.classList.remove("show");
-  }
+  if (e.target.tagName === "A") closeMobileMenu();
 });
+
+// Закрытие при клике вне меню
+menuOverlay.addEventListener("click", closeMobileMenu);
 
 /* =========================
    10) События кликов
@@ -699,23 +692,18 @@ document.addEventListener("click", (e)=>{
 
   // Открыть модалку
   if(t.matches("[data-open]")){
-    const id = t.getAttribute("data-open");
-    const cat = t.getAttribute("data-cat");
-    openModal(cat, id);
+    openModal(t.getAttribute("data-cat"), t.getAttribute("data-open"));
   }
 
-  // В корзину из карточки
+  // В корзину из карточки (✅ НЕ открываем корзину автоматически)
   if(t.matches("[data-add]")){
     const id = t.getAttribute("data-add");
     const cat = t.getAttribute("data-cat");
-
-    // если есть select размеров — берём его
     const card = t.closest(".card");
     const sel = card ? card.querySelector(".size") : null;
     const sizeIndex = sel ? Number(sel.value) : null;
 
     addToCart({cat, id, sizeIndex});
-    openCart();
   }
 
   // Размер в модалке
@@ -738,11 +726,10 @@ document.addEventListener("click", (e)=>{
 qs("#modalBg").addEventListener("click", closeModal);
 qs("#modalClose").addEventListener("click", closeModal);
 
-// Модалка: добавить в корзину
+// Модалка: добавить в корзину (✅ НЕ открываем корзину автоматически)
 qs("#modalAdd").addEventListener("click", ()=>{
   addToCart({cat: modalState.cat, id: modalState.id, sizeIndex: modalState.sizeIndex});
   closeModal();
-  openCart();
 });
 
 // Кнопки корзины
@@ -755,12 +742,12 @@ qs("#cartOverlay").addEventListener("click", closeCart);
 qs("#cartClear").addEventListener("click", clearCart);
 qs("#cartOrder").addEventListener("click", sendToWhatsApp);
 
-// ESC закрывает модалку/корзину
+// ESC закрывает модалку/корзину/меню
 document.addEventListener("keydown",(e)=>{
   if(e.key === "Escape"){
     closeModal();
     closeCart();
-    mobileMenu.classList.remove("show");
+    closeMobileMenu();
   }
 });
 

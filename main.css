@@ -100,19 +100,41 @@ body{
 .desktop-only{display:flex}
 .mobile-only{display:none}
 
-/* мобильное меню */
+/* ===== MOBILE MENU (анимация + overlay) ===== */
 .mobile-menu{
-  display:none;
+  display:flex;
   padding:10px 0 14px;
   gap:10px;
   flex-wrap:wrap;
+
+  max-height:0;
+  opacity:0;
+  transform:translateY(-8px);
+  overflow:hidden;
+  pointer-events:none;
+  transition:max-height .25s ease, opacity .2s ease, transform .25s ease;
 }
-.mobile-menu.show{display:flex}
+.mobile-menu.show{
+  max-height:420px;
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
 .mobile-menu a, .mini-cart{
   padding:10px 12px;border-radius:12px;border:1px solid var(--border);
   background:rgba(255,255,255,.75);text-decoration:none;color:#111;font-weight:1000
 }
 .mini-cart{cursor:pointer}
+
+/* overlay для закрытия кликом вне меню */
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:transparent;
+  display:none;
+  z-index:900;
+}
+.menu-overlay.show{display:block}
 
 /* ===== HERO ===== */
 .hero{padding:26px 0 18px}
